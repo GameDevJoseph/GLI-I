@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 2057f9c2906734bec89c4d8d0c44381d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f10e392824b77854e9373522eee4405c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -109,6 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb072dd7d12ef95439fd2aa898c341c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hideTimer: 0
+  _offset: {x: 0, y: 0, z: -2}
+  _barriers:
+  - {fileID: 0}
+  _currentState: 0
 --- !u!136 &8123586428994305056
 CapsuleCollider:
   m_ObjectHideFlags: 0

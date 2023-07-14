@@ -31,6 +31,7 @@ public class SpawnManager : MonoBehaviour
     {
         StartSpawning();
     }
+
     public void SpawnAI()
     {
         GameObject monster = PoolManager.Instance.RequestMonster();
