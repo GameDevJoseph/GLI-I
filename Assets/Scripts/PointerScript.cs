@@ -27,7 +27,6 @@ public class PointerScript : MonoBehaviour
             {
                 if(hitInfo.collider.name == "Floor")
                 {
-                    _player.UpdateDestination(hitInfo.point);
                 }
             }
         }

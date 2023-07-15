@@ -6,38 +6,32 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Vector3 _targetDestination;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        var distance = Vector3.Distance(_targetDestination, transform.position);
+        Shoot();
+    }
 
-        if(distance > 1.0f)
+
+
+    public void Shoot()
+    {
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            var direction = _targetDestination - transform.position;
-            direction.Normalize();
-            transform.Translate(direction * 2.0f * Time.deltaTime);
+            Vector3 mousePosition = Mouse.current.position.ReadValue();
+            Ray rayOrigin = Camera.main.ScreenPointToRay(mousePosition);
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(rayOrigin, out hitInfo, Mathf.Infinity, 1 << 6 | 1 << 8))
+            {
+                Debug.Log(hitInfo.collider.name);
+            }
         }
     }
-
-    public void UpdateDestination(Vector3 pos)
-    {
-        pos.y = 1.9f;
-        _targetDestination = pos;
-    }
-
-    //public void challenegeOne()
-    //{
-    //    if (Mouse.current.leftButton.wasPressedThisFrame)
-    //    {
-    //        Vector3 mousePosition = Mouse.current.position.ReadValue();
-    //Ray rayOrigin = Camera.main.ScreenPointToRay(mousePosition);
-    //RaycastHit hitInfo;
-
-    //        if(Physics.Raycast(rayOrigin, out hitInfo, Mathf.Infinity, 1 << 6 | 1 << 7))
-    //        {
-    //            hitInfo.collider.GetComponent<MeshRenderer>().material.color = Color.red;
-    //        }
-    //    }
-    //}
 }
