@@ -39,6 +39,7 @@ public class PoolManager : MonoBehaviour
             monster.transform.parent = _monsterContainer.transform;
             monster.SetActive(false);
             _monsterPool.Add(monster);
+            UIManager.Instance.AddToEnemyCount();
         }
         return _monsterPool;
     }

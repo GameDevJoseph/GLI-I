@@ -122,6 +122,8 @@ public class EnemyAI : MonoBehaviour
             _anim.SetFloat("Speed", 0f);
             _anim.SetTrigger("Death");
             _hasDied = true;
+            UIManager.Instance.RemoveFromEnemyCount();
+            UIManager.Instance.AddToScore(50);
         }
     }
 }
