@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _firingClip;
 
     private void Start()
     {
@@ -16,6 +18,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         Shoot();
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            UIManager.Instance.Reload();
+        }
     }
 
 
@@ -30,19 +37,23 @@ public class Player : MonoBehaviour
                 Vector3 mousePosition = Mouse.current.position.ReadValue();
                 Ray rayOrigin = Camera.main.ScreenPointToRay(mousePosition);
                 RaycastHit hitInfo;
+                _audioSource.PlayOneShot(_firingClip);
 
                 if (Physics.Raycast(rayOrigin, out hitInfo, Mathf.Infinity, 1 << 6 | 1 << 8))
                 {
-                    Debug.Log(hitInfo.collider.name);
+                    var damagable = hitInfo.collider.GetComponent<IDamagable>();
+
+                    if(damagable != null)
+                    {
+                        damagable.Damage(10);
+                        damagable.PlayDamageAudio();
+                    }
 
                 }
             }
-        }else if(UIManager.Instance.Ammo() <= 0)
+        }else
         {
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            { 
-                UIManager.Instance.Reload();
-            }
+            return;
         }
     }
 }

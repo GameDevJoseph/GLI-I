@@ -9,6 +9,7 @@ TagManager:
   - Capsule
   - EndPoint
   - Barrier
+  - Enemy
   layers:
   - Default
   - TransparentFX
